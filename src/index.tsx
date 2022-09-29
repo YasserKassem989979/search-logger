@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SearchLogger } from './containers/SearchLogger';
+import './index.css';
+import { SearchLogger } from './containers/Logger';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './config/theme';
