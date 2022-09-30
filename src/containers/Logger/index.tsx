@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import { useTheme } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const SearchLogger = () => {
     const theme = useTheme();
@@ -35,6 +37,21 @@ const SearchLogger = () => {
                 />
             </div>
             <SearchFrom />
+
+            {true && (
+                <Box
+                    sx={{
+                        flexDirection: 'column',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyItems: 'center',
+                        flex: 1,
+                        padding: '16px',
+                    }}
+                >
+                    <CircularProgress />
+                </Box>
+            )}
         </div>
     );
 };
