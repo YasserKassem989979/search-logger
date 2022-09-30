@@ -8,24 +8,20 @@ import { useFormik } from 'formik';
 import { Select } from '../../components/Select';
 import { TextInput } from '../../components/TextInput';
 import { LoggerSearchForm } from '../../models/forms';
-import { DateFormats, getCurrentMonth } from '../../helpers/date';
+import { DateFormats } from '../../helpers/date';
 import moment, { Moment } from 'moment';
-import { actionTypeOptions, applicationTypeOptions } from '../../helpers/selectOptions';
+import { actionTypeOptions, applicationTypeOptions } from '../../config/constants/selectOptions';
 
-const initialValues: LoggerSearchForm = {
-    employeeName: '',
-    fromDate: getCurrentMonth().startOfMonth,
-    toDate: getCurrentMonth().endOfMonth,
-    applicationId: '',
-    applicationType: '',
-    actionType: '',
-};
+interface SearchFormProps {
+    filters: LoggerSearchForm;
+    setFilters: React.Dispatch<React.SetStateAction<LoggerSearchForm>>;
+}
 
-function SearchFrom(): JSX.Element {
+function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
     const form = useFormik({
-        initialValues: initialValues,
+        initialValues: filters,
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            setFilters(values);
         },
     });
 
@@ -51,7 +47,6 @@ function SearchFrom(): JSX.Element {
             >
                 <TextInput
                     name="employeeName"
-                    onBlur={form.handleBlur}
                     error={!!form.errors.employeeName}
                     onChange={form.handleChange}
                     value={form.values.employeeName}
@@ -115,7 +110,6 @@ function SearchFrom(): JSX.Element {
                 </LocalizationProvider>
                 <TextInput
                     name="applicationId"
-                    onBlur={form.handleBlur}
                     error={!!form.errors.applicationId}
                     onChange={form.handleChange}
                     value={form.values.applicationId}

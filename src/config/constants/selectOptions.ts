@@ -1,4 +1,4 @@
-import { AppicationType, ActionType } from '../models/forms';
+import { AppicationType, ActionType } from '../../models/forms';
 
 /**======================
  * Application Type Options
