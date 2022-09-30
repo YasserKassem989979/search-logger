@@ -10,6 +10,7 @@ import { TextInput } from '../../components/TextInput';
 import { LoggerSearchForm } from '../../models/forms';
 import { DateFormats, getCurrentMonth } from '../../helpers/date';
 import moment, { Moment } from 'moment';
+import { actionTypeOptions, applicationTypeOptions } from '../../helpers/selectOptions';
 
 const initialValues: LoggerSearchForm = {
     employeeName: '',
@@ -20,7 +21,7 @@ const initialValues: LoggerSearchForm = {
     actionType: '',
 };
 
-const SearchFrom = () => {
+function SearchFrom(): JSX.Element {
     const form = useFormik({
         initialValues: initialValues,
         onSubmit: (values) => {
@@ -28,8 +29,7 @@ const SearchFrom = () => {
         },
     });
 
-    const handleChangeDate = (name: string, newValue: Moment | null) => {
-        console.log('newValue', newValue);
+    function handleChangeDate({ name, newValue }: { name: string; newValue: Moment | null }): void {
         const event = {
             target: {
                 name,
@@ -37,7 +37,7 @@ const SearchFrom = () => {
             },
         };
         form.handleChange(event);
-    };
+    }
 
     return (
         <form onSubmit={form.handleSubmit}>
@@ -66,23 +66,25 @@ const SearchFrom = () => {
                     sx={{ minWidth: 200 }}
                     title="Action Type"
                     labelId="actionType"
-                    items={[{ value: 'value', title: 'title' }]}
+                    items={actionTypeOptions}
                 />
                 <Select
                     onChange={form.handleChange}
-                    name="actionType"
-                    value={form.values.actionType}
+                    name="applicationType"
+                    value={form.values.applicationType}
                     sx={{ minWidth: 200 }}
-                    title="Action Type"
-                    labelId="actionType"
-                    items={[{ value: 'value', title: 'title' }]}
+                    title="Application Type"
+                    labelId="applicationType"
+                    items={applicationTypeOptions}
                 />
                 <LocalizationProvider dateAdapter={AdapterMoment}>
                     <div>
                         <InputLabel htmlFor="fromDate">From Date</InputLabel>
                         <DesktopDatePicker
                             value={form.values.fromDate}
-                            onChange={(value) => handleChangeDate('fromDate', moment(value))}
+                            onChange={(value) =>
+                                handleChangeDate({ name: 'fromDate', newValue: moment(value) })
+                            }
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
@@ -97,7 +99,9 @@ const SearchFrom = () => {
                         <InputLabel htmlFor="toDate">To Date</InputLabel>
                         <DesktopDatePicker
                             value={form.values.toDate}
-                            onChange={(value) => handleChangeDate('toDate', moment(value))}
+                            onChange={(value) =>
+                                handleChangeDate({ name: 'toDate', newValue: moment(value) })
+                            }
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
@@ -125,6 +129,6 @@ const SearchFrom = () => {
             </div>
         </form>
     );
-};
+}
 
 export { SearchFrom };
