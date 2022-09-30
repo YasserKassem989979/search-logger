@@ -2,7 +2,7 @@ import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { useApplicationsApi } from '../../hooks/apiHooks';
+import { useApi } from '../../hooks/useApi';
 import { Size, useWindowSize } from '../../hooks/useWindowSize';
 import { createApplicationRow } from '../../helpers/table';
 import { LoggerSearchForm } from '../../models/forms';
@@ -17,7 +17,7 @@ interface LoggerTableProps {
     filters: LoggerSearchForm;
 }
 const LoggerTable = ({ filters }: LoggerTableProps): JSX.Element => {
-    const { data, isLoading } = useApplicationsApi(filters);
+    const { data, isLoading } = useApi(filters);
     const size: Size = useWindowSize();
 
     //columns of table

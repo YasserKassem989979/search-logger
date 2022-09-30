@@ -15,7 +15,7 @@ interface SelectProps extends MuiSlectProps {
     items: Item[];
 }
 
-const Select = (props: SelectProps) => {
+const Select = (props: SelectProps): JSX.Element => {
     return (
         <div>
             {!!props.title && <InputLabel id={props.labelId}>{props.title}</InputLabel>}
