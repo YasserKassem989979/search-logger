@@ -5,6 +5,7 @@ import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { LoggerSearchForm } from '../../models/forms';
 import { getCurrentMonth } from '../../helpers/date';
 import styles from './styles.module.css';
+import { useQuery } from '../../hooks/useQuery';
 
 //initial values passed to form
 const initialValues: LoggerSearchForm = {
@@ -17,6 +18,16 @@ const initialValues: LoggerSearchForm = {
 };
 
 const SearchLogger = () => {
+    // to get query parmas
+    let query = useQuery();
+    //update initial state with query params
+    for (let key in initialValues) {
+        if (query.has(key)) {
+            initialValues[key as keyof LoggerSearchForm] = query.get(key) as string;
+        }
+    }
+
+    //state
     const [filters, setFilters] = useState<LoggerSearchForm>(initialValues);
 
     return (

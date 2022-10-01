@@ -9,8 +9,8 @@ export type AppicationType = 'ADD_COMPANY_EMPLOYEE' | 'CERT_PROP_OWNERSHIP';
 
 export interface LoggerSearchForm {
     employeeName: string;
-    actionType: ActionType | '';
-    applicationType: AppicationType | '';
+    actionType: ActionType | string;
+    applicationType: AppicationType | string;
     fromDate: string;
     toDate: string;
     applicationId: number | string;
