@@ -16,5 +16,23 @@ export const theme = createTheme({
                 },
             },
         },
+        MuiPaginationItem: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 4,
+                },
+            },
+        },
+        MuiPagination: {
+            styleOverrides: {
+                root: {
+                    width: '100%',
+                },
+                ul: {
+                    width: '100%',
+                    justifyContent: 'center',
+                },
+            },
+        },
     },
 });

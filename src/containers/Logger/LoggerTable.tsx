@@ -1,11 +1,12 @@
 import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useApi } from '../../hooks/useApi';
 import { Size, useWindowSize } from '../../hooks/useWindowSize';
 import { createApplicationRow } from '../../helpers/table';
 import { LoggerSearchForm } from '../../models/forms';
+import styles from './styles.module.css';
+import { CustomPagination } from '../../components/CustomPagination';
 
 //constants
 const CELL_HEIGHT = 52;
@@ -38,18 +39,9 @@ const LoggerTable = ({ filters }: LoggerTableProps): JSX.Element => {
 
     if (isLoading) {
         return (
-            <Box
-                sx={{
-                    flexDirection: 'column',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyItems: 'center',
-                    flex: 1,
-                    padding: '16px',
-                }}
-            >
+            <div className={styles.loader}>
                 <CircularProgress />
-            </Box>
+            </div>
         );
     }
 
@@ -60,6 +52,9 @@ const LoggerTable = ({ filters }: LoggerTableProps): JSX.Element => {
                 columns={columns}
                 pageSize={PAGE_SIZE}
                 rowsPerPageOptions={[PAGE_SIZE]}
+                components={{
+                    Pagination: CustomPagination,
+                }}
             />
         </div>
     );
