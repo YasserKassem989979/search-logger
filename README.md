@@ -4,7 +4,7 @@ Application to search and list applications Logger.
 
 ## Local Development Environment
 
-Make sure you have a recent version of [Node.js](https://nodejs.org/en/) installed.
+Make sure you have a recent version of [Node.js](https://nodejs.org/en/) installed, then install Yarn :
 
 ```sh
 npm install --global yarn
