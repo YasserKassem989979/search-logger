@@ -6,6 +6,7 @@ import { LoggerSearchForm } from '../../models/forms';
 import { getCurrentMonth } from '../../helpers/date';
 import styles from './styles.module.css';
 
+//initial values passed to form
 const initialValues: LoggerSearchForm = {
     employeeName: '',
     fromDate: getCurrentMonth().startOfMonth,

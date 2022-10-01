@@ -1,5 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
+/**======================
+ * default theme provided to MUI
+ *========================**/
 export const theme = createTheme({
     components: {
         MuiOutlinedInput: {

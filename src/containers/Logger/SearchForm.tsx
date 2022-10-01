@@ -27,7 +27,13 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
         },
     });
 
-    function handleChangeDate({ name, newValue }: { name: string; newValue: Moment | null }): void {
+    const handleChangeDate = ({
+        name,
+        newValue,
+    }: {
+        name: string;
+        newValue: Moment | null;
+    }): void => {
         const event = {
             target: {
                 name,
@@ -35,7 +41,7 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
             },
         };
         form.handleChange(event);
-    }
+    };
 
     return (
         <form onSubmit={form.handleSubmit}>
