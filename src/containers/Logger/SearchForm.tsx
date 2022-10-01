@@ -5,12 +5,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { InputLabel } from '@mui/material';
 import { useFormik } from 'formik';
-import { Select } from '../../components/Select';
+import moment, { Moment } from 'moment';
+import { actionTypeOptions, applicationTypeOptions } from '../../config/constants/selectOptions';
 import { TextInput } from '../../components/TextInput';
 import { LoggerSearchForm } from '../../models/forms';
 import { DateFormats } from '../../helpers/date';
-import moment, { Moment } from 'moment';
-import { actionTypeOptions, applicationTypeOptions } from '../../config/constants/selectOptions';
+import { Select } from '../../components/Select';
+import styles from './styles.module.css';
 
 interface SearchFormProps {
     filters: LoggerSearchForm;
@@ -18,6 +19,7 @@ interface SearchFormProps {
 }
 
 function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
+    //form
     const form = useFormik({
         initialValues: filters,
         onSubmit: (values) => {
@@ -37,43 +39,43 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
 
     return (
         <form onSubmit={form.handleSubmit}>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                }}
-            >
-                <TextInput
-                    name="employeeName"
-                    error={!!form.errors.employeeName}
-                    onChange={form.handleChange}
-                    value={form.values.employeeName}
-                    placeholder="eg. Joe"
-                    id="employeeName"
-                    title="Employee Name"
-                />
-                <Select
-                    onChange={form.handleChange}
-                    name="actionType"
-                    value={form.values.actionType}
-                    sx={{ minWidth: 200 }}
-                    title="Action Type"
-                    labelId="actionType"
-                    items={actionTypeOptions}
-                />
-                <Select
-                    onChange={form.handleChange}
-                    name="applicationType"
-                    value={form.values.applicationType}
-                    sx={{ minWidth: 200 }}
-                    title="Application Type"
-                    labelId="applicationType"
-                    items={applicationTypeOptions}
-                />
+            <div className={styles.formContainer}>
+                <div className={styles.flexOne}>
+                    <TextInput
+                        className={styles.width90}
+                        name="employeeName"
+                        error={!!form.errors.employeeName}
+                        onChange={form.handleChange}
+                        value={form.values.employeeName}
+                        placeholder="eg. Joe"
+                        id="employeeName"
+                        title="Employee Name"
+                    />
+                </div>
+                <div className={styles.flexOne}>
+                    <Select
+                        className={styles.width90}
+                        onChange={form.handleChange}
+                        name="actionType"
+                        value={form.values.actionType}
+                        title="Action Type"
+                        labelId="actionType"
+                        items={actionTypeOptions}
+                    />
+                </div>
+                <div className={styles.flexOne}>
+                    <Select
+                        className={styles.width90}
+                        onChange={form.handleChange}
+                        name="applicationType"
+                        value={form.values.applicationType}
+                        title="Application Type"
+                        labelId="applicationType"
+                        items={applicationTypeOptions}
+                    />
+                </div>
                 <LocalizationProvider dateAdapter={AdapterMoment}>
-                    <div>
+                    <div className={styles.flexOne}>
                         <InputLabel htmlFor="fromDate">From Date</InputLabel>
                         <DesktopDatePicker
                             value={form.values.fromDate}
@@ -86,11 +88,12 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
                                     id="fromDate"
                                     name="fromDate"
                                     onChange={form.handleChange}
+                                    className={styles.width90}
                                 />
                             )}
                         />
                     </div>
-                    <div>
+                    <div className={styles.flexOne}>
                         <InputLabel htmlFor="toDate">To Date</InputLabel>
                         <DesktopDatePicker
                             value={form.values.toDate}
@@ -103,20 +106,24 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
                                     id="toDate"
                                     name="toDate"
                                     onChange={form.handleChange}
+                                    className={styles.width90}
                                 />
                             )}
                         />
                     </div>
                 </LocalizationProvider>
-                <TextInput
-                    name="applicationId"
-                    error={!!form.errors.applicationId}
-                    onChange={form.handleChange}
-                    value={form.values.applicationId}
-                    placeholder="eg. 2345/2022"
-                    id="applicationId"
-                    title="Application Id"
-                />
+                <div className={styles.flexOne}>
+                    <TextInput
+                        className={styles.width90}
+                        name="applicationId"
+                        error={!!form.errors.applicationId}
+                        onChange={form.handleChange}
+                        value={form.values.applicationId}
+                        placeholder="eg. 2345/2022"
+                        id="applicationId"
+                        title="Application Id"
+                    />
+                </div>
                 <Button sx={{ alignSelf: 'end' }} variant="contained" type="submit">
                     Search
                 </Button>
