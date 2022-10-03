@@ -4,6 +4,7 @@ import { Button, TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { InputLabel } from '@mui/material';
+import Chip from '@mui/material/Chip';
 import { useFormik } from 'formik';
 import moment, { Moment } from 'moment';
 import { actionTypeOptions, applicationTypeOptions } from '../../config/constants/selectOptions';
@@ -23,6 +24,9 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
     const form = useFormik({
         initialValues: filters,
         onSubmit: (values) => {
+            setFilters(values);
+        },
+        onReset: (values) => {
             setFilters(values);
         },
     });
@@ -134,6 +138,15 @@ function SearchFrom({ filters, setFilters }: SearchFormProps): JSX.Element {
                     Search
                 </Button>
             </div>
+            {form.dirty && (
+                <div className={styles.restFilters}>
+                    <Chip
+                        label="Clear Filters"
+                        onClick={() => form.resetForm({})}
+                        onDelete={() => form.resetForm({})}
+                    />
+                </div>
+            )}
         </form>
     );
 }

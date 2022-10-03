@@ -4,7 +4,9 @@ import { Application } from '../models/api';
 import { LoggerSearchForm } from '../models/forms';
 
 export function useApi(filters: LoggerSearchForm) {
-    const { data, error } = useSWR(`applications`, (url) => fetchData(url, filters));
+    const { data, error } = useSWR(`applications${JSON.stringify(filters)}`, (url) =>
+        fetchData(url, filters),
+    );
 
     const applications: Application[] = data?.auditLog;
 
